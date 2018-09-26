@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="写好 commit messageGit 每次提交代码，都要写 Commit message，否则提交不了。我们不光得写 Commit message 而且还应该写的清晰明了，说明本次提交的目的。1$ git commit -m &quot;提交信息&quot; 在编辑器中写commit message1$ git commit 写好 Commit message 好处多多： 1、统一团队Git commit 日志风">
+<meta property="og:type" content="article">
+<meta property="og:title" content="更优雅的使用 Git">
+<meta property="og:url" content="http://yoursite.com/2018/05/more-elegant-use-of-git/index.html">
+<meta property="og:site_name" content="LIU XING">
+<meta property="og:description" content="写好 commit messageGit 每次提交代码，都要写 Commit message，否则提交不了。我们不光得写 Commit message 而且还应该写的清晰明了，说明本次提交的目的。1$ git commit -m &quot;提交信息&quot; 在编辑器中写commit message1$ git commit 写好 Commit message 好处多多： 1、统一团队Git commit 日志风">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/5/8/1633eab52fa3de92?w=557&h=300&f=jpeg&s=37427">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/5/8/1633eab52fbb6fdc?w=1548&h=918&f=gif&s=1926466">
+<meta property="og:updated_time" content="2018-09-26T03:24:58.122Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="更优雅的使用 Git">
+<meta name="twitter:description" content="写好 commit messageGit 每次提交代码，都要写 Commit message，否则提交不了。我们不光得写 Commit message 而且还应该写的清晰明了，说明本次提交的目的。1$ git commit -m &quot;提交信息&quot; 在编辑器中写commit message1$ git commit 写好 Commit message 好处多多： 1、统一团队Git commit 日志风">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/5/8/1633eab52fa3de92?w=557&h=300&f=jpeg&s=37427">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+        
+    
+    <!-- title -->
+    <title>更优雅的使用 Git</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="http://github.com/liuxing">Projects</a></li>
+         
+          <li><a href="/one-more-thing/">One more thing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/06/node-blog-tutorial/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/05/css-modules-tutorial/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/05/more-elegant-use-of-git/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&text=更优雅的使用 Git"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&title=更优雅的使用 Git"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&is_video=false&description=更优雅的使用 Git"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=更优雅的使用 Git&body=Check out this article: http://yoursite.com/2018/05/more-elegant-use-of-git/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&title=更优雅的使用 Git"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&title=更优雅的使用 Git"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&title=更优雅的使用 Git"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&title=更优雅的使用 Git"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&name=更优雅的使用 Git&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#写好-commit-message"><span class="toc-number">1.</span> <span class="toc-text">写好 commit message</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Commit-提交规范"><span class="toc-number">2.</span> <span class="toc-text">Commit 提交规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-commitzen"><span class="toc-number">3.</span> <span class="toc-text">使用 commitzen</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-gitmoji"><span class="toc-number">4.</span> <span class="toc-text">使用 gitmoji</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Git-hooks"><span class="toc-number">5.</span> <span class="toc-text">使用Git hooks</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        更优雅的使用 Git
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">LIU XING</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-05-07T16:00:00.000Z" itemprop="datePublished">2018-05-08</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="写好-commit-message"><a href="#写好-commit-message" class="headerlink" title="写好 commit message"></a>写好 commit message</h2><p>Git 每次提交代码，都要写 Commit message，否则提交不了。我们不光得写 Commit message 而且还应该写的清晰明了，说明本次提交的目的。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m <span class="string">"提交信息"</span></span><br></pre></td></tr></table></figure></p>
+<p>在编辑器中写commit message<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit</span><br></pre></td></tr></table></figure></p>
+<p>写好 Commit message 好处多多：</p>
+<p>1、统一团队Git commit 日志风格</p>
+<p>2、方便日后 Reviewing Code</p>
+<p>3、帮助我们写好 Changelog </p>
+<p>4、能很好的提升项目整体质量</p>
+<h2 id="Commit-提交规范"><a href="#Commit-提交规范" class="headerlink" title="Commit 提交规范"></a><strong>Commit 提交规范</strong></h2><p>业界比较推崇 Angular 的 commit 规范  <a href="http://suo.im/4rsYee" target="_blank" rel="noopener">http://suo.im/4rsYee</a></p>
+<p>Commit message 包括三个部分：Header，Body 和 Footer。完整格式如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">type</span>&gt;</span>(<span class="tag">&lt;<span class="name">scope</span>&gt;</span>): <span class="tag">&lt;<span class="name">subject</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">BLANK</span> <span class="attr">LINE</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">BLANK</span> <span class="attr">LINE</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>1) type</strong></p>
+<p>提交 commit 的类型，包括以下几种</p>
+<p>- feat: 新功能</p>
+<p>- fix: 修复问题</p>
+<p>- docs: 修改文档</p>
+<p>- style: 修改代码格式，不影响代码逻辑</p>
+<p>- refactor: 重构代码，理论上不影响现有功能</p>
+<p>- perf: 提升性能</p>
+<p>- test: 增加修改测试用例</p>
+<p>- chore: 修改工具相关（包括但不限于文档、代码生成等）</p>
+<p><strong>2) scope</strong></p>
+<p>修改文件的范围，比如：视图层、控制层、docs、config, plugin</p>
+<p><strong>3) subject</strong></p>
+<p>- subject 是 commit 目的的简短描述（用一句话清楚的描述这次提交做了什么），不超过50个字符</p>
+<p><strong>4) body</strong></p>
+<p>- 补充 subject 添加详细说明，可以分成多行，适当增加原因、目的等相关因素，也可不写</p>
+<p>5 ) footer</p>
+<p>- 当有非兼容修改(Breaking Change)时必须在这里描述清楚</p>
+<p>- 关闭issue或是链接到相关文档，如 Closes #1, Closes #2, #3</p>
+<h2 id="使用-commitzen"><a href="#使用-commitzen" class="headerlink" title="使用 commitzen"></a>使用 commitzen</h2><p>commitzen 这个工具可以帮助我们写出规范的 Commit message。</p>
+<p>GitHub：<a href="https://github.com/commitizen/cz-cli" target="_blank" rel="noopener">https://github.com/commitizen/cz-cli</a></p>
+<p><strong><img src="https://user-gold-cdn.xitu.io/2018/5/8/1633eab52fa3de92?w=557&amp;h=300&amp;f=jpeg&amp;s=37427" alt="img"></strong></p>
+<p>使用npm 全局安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g commitizen</span><br></pre></td></tr></table></figure>
+<p>在项目中使用 angular 的 commit 规范</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ commitizen init cz-conventional-changelog --save-dev --save-exact</span><br></pre></td></tr></table></figure>
+<p>然后我们就可以愉快的使用 git cz 代替 git commit 命令了。当然我们也可也将其加到npm script 中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"script"</span>: &#123;</span><br><span class="line">    <span class="string">"commit"</span>: <span class="string">"git cz"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后直接使用npm run commit</p>
+<h2 id="使用-gitmoji"><a href="#使用-gitmoji" class="headerlink" title="使用 gitmoji"></a>使用 gitmoji</h2><p>gitmoji 和 commitzen的作用都是帮助我们写出规范的commit message，不过gitmoji有更好玩的 moji表情。（ 用moji来表示type ）</p>
+<p>GitHub：<a href="https://github.com/carloscuesta/gitmoji-cli" target="_blank" rel="noopener">https://github.com/carloscuesta/gitmoji-cli</a></p>
+<p>安装使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">$ npm i -g gitmoji-cli</span><br><span class="line"><span class="comment"># 使用</span></span><br><span class="line">$ gitmoji -c</span><br></pre></td></tr></table></figure></p>
+<p>挑选个符合场景的moji 提交本次更改</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/5/8/1633eab52fbb6fdc?w=1548&amp;h=918&amp;f=gif&amp;s=1926466" alt="img"></p>
+<h2 id="使用Git-hooks"><a href="#使用Git-hooks" class="headerlink" title="使用Git hooks"></a>使用Git hooks</h2><p>与其他版本控制系统一样，当某些重要事件发生时，Git 可以调用自定义脚本，Git 有很多钩子可以用来调用脚本自定义 Git。在 .git -&gt; hooks 目录下可以看到示例。 例如：pre-commit就是在代码提交之前做些事情。如果你打开了 hooks 目录里面的 <code>*.sample</code> 文件，你可以看见里面写的shell脚本。但是我想用 Js 写 hooks 咋办？husky、pre-commit就能满足你。</p>
+<p>现在我们想实现一个提交代码时使用 Eslint 进行代码检查的功能</p>
+<p><strong>先来看pre-commit</strong></p>
+<p>GitHub：<a href="https://github.com/observing/pre-commit" target="_blank" rel="noopener">https://github.com/observing/pre-commit</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 下载安装</span><br><span class="line">npm install --save-dev pre-commit</span><br></pre></td></tr></table></figure>
+<p>在package.json 中配置pre-commit</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;    </span><br><span class="line">   &quot;lint&quot;: &quot;eslint [options] [file|dir|glob]*&quot;,</span><br><span class="line">&#125;,</span><br><span class="line">&quot;pre-commit&quot;: [    </span><br><span class="line">   &quot;lint&quot;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>现在提交代码试试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &apos;Keep calm and commit&apos;</span><br></pre></td></tr></table></figure>
+<p><strong>再试试 husky</strong></p>
+<p>GitHub：<a href="https://github.com/typicode/husky" target="_blank" rel="noopener">https://github.com/typicode/husky</a></p>
+<p>开始还是下载，不过这儿我们用的是 @next 版，使用方法与正式版略有不同。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install husky@next --save-dev</span><br></pre></td></tr></table></figure>
+<p>和 pre-commit 一样，还是在package.json中配置。但是处理pre-commit钩子它还可以做的更多。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// package.json</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"lint"</span>: <span class="string">"eslint [options] [file|dir|glob]*"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"husky"</span>: &#123;</span><br><span class="line">    <span class="attr">"hooks"</span>: &#123;</span><br><span class="line">      <span class="attr">"pre-commit"</span>: <span class="string">"npm lint"</span>,</span><br><span class="line">      <span class="attr">"pre-push"</span>: <span class="string">"..."</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>本文介绍了如何规范的编写Commit message，以及使用commentzen与gitmoji这两个工具来帮助我们写出规范的Commit message。最后介绍了下Git hooks，并通过 husky 或是 pre-commit 与 Eslint结合使用来构建一个代码检测工作流。当然，你还可以做的更多。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="http://github.com/liuxing">Projects</a></li>
+         
+          <li><a href="/one-more-thing/">One more thing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#写好-commit-message"><span class="toc-number">1.</span> <span class="toc-text">写好 commit message</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Commit-提交规范"><span class="toc-number">2.</span> <span class="toc-text">Commit 提交规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-commitzen"><span class="toc-number">3.</span> <span class="toc-text">使用 commitzen</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-gitmoji"><span class="toc-number">4.</span> <span class="toc-text">使用 gitmoji</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Git-hooks"><span class="toc-number">5.</span> <span class="toc-text">使用Git hooks</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/05/more-elegant-use-of-git/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&text=更优雅的使用 Git"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&title=更优雅的使用 Git"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&is_video=false&description=更优雅的使用 Git"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=更优雅的使用 Git&body=Check out this article: http://yoursite.com/2018/05/more-elegant-use-of-git/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&title=更优雅的使用 Git"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&title=更优雅的使用 Git"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&title=更优雅的使用 Git"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&title=更优雅的使用 Git"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/05/more-elegant-use-of-git/&name=更优雅的使用 Git&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Liu Xing
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="http://github.com/liuxing">Projects</a></li>
+         
+          <li><a href="/one-more-thing/">One more thing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

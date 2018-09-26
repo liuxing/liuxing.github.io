@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Node命令行工具开发【看段子】 你有没有上班想看笑话却又怕领导发现的经历？现在我们就用几十行代码写一个命令行看笑话段子的小程序，从此无需担心领导的视察。这篇文章和上一篇差不多都是命令行小工具开发，不过本篇更偏向于小爬虫的开发  总览：命令行看段子小程序我们先来看看我们今天的小目标：  先为它起个命吧：joke-cli 爬取并提取 糗事百科的笑话 输出到命令行按下回车显示一条段子  初识[新手村]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node命令行工具开发【看段子】">
+<meta property="og:url" content="http://yoursite.com/2017/03/joke-cli/index.html">
+<meta property="og:site_name" content="LIU XING">
+<meta property="og:description" content="Node命令行工具开发【看段子】 你有没有上班想看笑话却又怕领导发现的经历？现在我们就用几十行代码写一个命令行看笑话段子的小程序，从此无需担心领导的视察。这篇文章和上一篇差不多都是命令行小工具开发，不过本篇更偏向于小爬虫的开发  总览：命令行看段子小程序我们先来看看我们今天的小目标：  先为它起个命吧：joke-cli 爬取并提取 糗事百科的笑话 输出到命令行按下回车显示一条段子  初识[新手村]">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://ommpd2lnj.bkt.clouddn.com/qiushibaike-url.png">
+<meta property="og:image" content="http://ommpd2lnj.bkt.clouddn.com/qiushibaike-html.png">
+<meta property="og:updated_time" content="2018-09-26T03:13:08.330Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node命令行工具开发【看段子】">
+<meta name="twitter:description" content="Node命令行工具开发【看段子】 你有没有上班想看笑话却又怕领导发现的经历？现在我们就用几十行代码写一个命令行看笑话段子的小程序，从此无需担心领导的视察。这篇文章和上一篇差不多都是命令行小工具开发，不过本篇更偏向于小爬虫的开发  总览：命令行看段子小程序我们先来看看我们今天的小目标：  先为它起个命吧：joke-cli 爬取并提取 糗事百科的笑话 输出到命令行按下回车显示一条段子  初识[新手村]">
+<meta name="twitter:image" content="http://ommpd2lnj.bkt.clouddn.com/qiushibaike-url.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+        
+    
+    <!-- title -->
+    <title>Node命令行工具开发【看段子】</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="http://github.com/liuxing">Projects</a></li>
+         
+          <li><a href="/one-more-thing/">One more thing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/04/json-tutorial/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/03/translate-cli/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/03/joke-cli/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/03/joke-cli/&text=Node命令行工具开发【看段子】"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/03/joke-cli/&title=Node命令行工具开发【看段子】"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/03/joke-cli/&is_video=false&description=Node命令行工具开发【看段子】"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Node命令行工具开发【看段子】&body=Check out this article: http://yoursite.com/2017/03/joke-cli/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/03/joke-cli/&title=Node命令行工具开发【看段子】"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/03/joke-cli/&title=Node命令行工具开发【看段子】"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/03/joke-cli/&title=Node命令行工具开发【看段子】"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/03/joke-cli/&title=Node命令行工具开发【看段子】"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/03/joke-cli/&name=Node命令行工具开发【看段子】&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Node命令行工具开发【看段子】"><span class="toc-number">1.</span> <span class="toc-text">Node命令行工具开发【看段子】</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#总览：命令行看段子小程序"><span class="toc-number">1.1.</span> <span class="toc-text">总览：命令行看段子小程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初识-新手村"><span class="toc-number">1.2.</span> <span class="toc-text">初识[新手村]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cheerio"><span class="toc-number">1.2.1.</span> <span class="toc-text">cheerio</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#superagent"><span class="toc-number">1.2.2.</span> <span class="toc-text">superagent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初出茅庐【先拿百度练练手】"><span class="toc-number">1.2.3.</span> <span class="toc-text">初出茅庐【先拿百度练练手】</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始开发joke-cli"><span class="toc-number">1.3.</span> <span class="toc-text">开始开发joke-cli</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化项目"><span class="toc-number">1.3.1.</span> <span class="toc-text">初始化项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#首先分析糗事百科url"><span class="toc-number">1.3.2.</span> <span class="toc-text">首先分析糗事百科url</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始编写index-js"><span class="toc-number">1.3.3.</span> <span class="toc-text">开始编写index.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现命令行交互"><span class="toc-number">1.3.4.</span> <span class="toc-text">实现命令行交互</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Readline-逐行读取"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">Readline(逐行读取)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#改写index-js实现命令行交互功能"><span class="toc-number">1.3.5.</span> <span class="toc-text">改写index.js实现命令行交互功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关链接"><span class="toc-number">1.5.</span> <span class="toc-text">相关链接</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Node命令行工具开发【看段子】
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">LIU XING</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-03-17T16:00:00.000Z" itemprop="datePublished">2017-03-18</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Node命令行工具开发【看段子】"><a href="#Node命令行工具开发【看段子】" class="headerlink" title="Node命令行工具开发【看段子】"></a>Node命令行工具开发【看段子】</h1><blockquote>
+<p>你有没有上班想看笑话却又怕领导发现的经历？现在我们就用几十行代码写一个命令行看笑话段子的小程序，从此无需担心领导的视察。这篇文章和上一篇差不多都是命令行小工具开发，不过本篇更偏向于小爬虫的开发</p>
+</blockquote>
+<h2 id="总览：命令行看段子小程序"><a href="#总览：命令行看段子小程序" class="headerlink" title="总览：命令行看段子小程序"></a>总览：命令行看段子小程序</h2><p>我们先来看看我们今天的小目标：</p>
+<ul>
+<li>先为它起个命吧：<code>joke-cli</code></li>
+<li>爬取并提取 <a href="http://www.qiushibaike.com/" target="_blank" rel="noopener">糗事百科的笑话</a></li>
+<li>输出到命令行<em>按下回车显示一条段子</em></li>
+</ul>
+<h2 id="初识-新手村"><a href="#初识-新手村" class="headerlink" title="初识[新手村]"></a>初识[新手村]</h2><p>下面我们将介绍今天用到的主要模块</p>
+<h3 id="cheerio"><a href="#cheerio" class="headerlink" title="cheerio"></a>cheerio</h3><blockquote>
+<p><strong><code>cheerio</code></strong>可理解为服务器端的jQuery，基本用法与jQuery一样。有了它，我们在写小爬虫时就可抛开那可爱又可恨的正则表达式了。从此拥抱幸福生活。</p>
+</blockquote>
+<p>用法如下：</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cheerio = <span class="built_in">require</span>(<span class="string">'cheerio'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将html文本转化成可用jQuery操作的dom,,然后你就可以把它当成jQuery了</span></span><br><span class="line"><span class="keyword">let</span> $ = cheerio.load(<span class="string">'&lt;h2 class="title"&gt;Hello world&lt;/h2&gt;'</span>)</span><br><span class="line"> </span><br><span class="line">$(<span class="string">'h2.title'</span>).text(<span class="string">'Hello there!'</span>)</span><br><span class="line">$(<span class="string">'h2'</span>).addClass(<span class="string">'welcome'</span>)</span><br><span class="line"> </span><br><span class="line">$.html()</span><br><span class="line"><span class="comment">//=&gt; &lt;h2 class="title welcome"&gt;Hello there!&lt;/h2&gt;</span></span><br></pre></td></tr></table></figure>
+</code></pre><p><em>更多请参考<a href="https://cheerio.js.org/" target="_blank" rel="noopener">cheerio</a></em></p>
+<h3 id="superagent"><a href="#superagent" class="headerlink" title="superagent"></a>superagent</h3><p><code>superagent</code>专注于处理服务端/客户端的http请求，用法如下：</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">request</span><br><span class="line">  .get(url)</span><br><span class="line">  .end(<span class="function"><span class="keyword">function</span>(<span class="params">err, res</span>)</span>&#123;</span><br><span class="line">    </span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+</code></pre><p>就是这么简答，你已经学会使用它了，别懵逼，这三行代码，已经完全够我们本次示例的使用了。<em>额，当然了，更多的请移步官方文档</em></p>
+<ul>
+<li><a href="http://visionmedia.github.io/superagent/" target="_blank" rel="noopener">superagent</a></li>
+<li><a href="https://cnodejs.org/topic/5378720ed6e2d16149fa16bd" target="_blank" rel="noopener">[译] SuperAgent中文使用文档</a></li>
+</ul>
+<h3 id="初出茅庐【先拿百度练练手】"><a href="#初出茅庐【先拿百度练练手】" class="headerlink" title="初出茅庐【先拿百度练练手】"></a>初出茅庐【先拿百度练练手】</h3><p>我们已经介绍了今天的两大主角，那就先来练练手，就用百度吧</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> superAgent = <span class="built_in">require</span>(<span class="string">'superagent'</span>)</span><br><span class="line"><span class="keyword">const</span> cheerio = <span class="built_in">require</span>(<span class="string">'cheerio'</span>)</span><br><span class="line"><span class="keyword">const</span> URL = <span class="string">'http://www.baidu.com/'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 发起GET请求</span></span><br><span class="line">superAgent</span><br><span class="line">  .get(URL) </span><br><span class="line">  .end(<span class="function">(<span class="params">err, res</span>)=&gt;</span>&#123;</span><br><span class="line">  	<span class="keyword">if</span>(err) <span class="built_in">console</span>.error(err)</span><br><span class="line">    <span class="comment">// 用cheerio处理返回的html</span></span><br><span class="line">  	<span class="keyword">const</span> $ = cheerio.load(res.text)</span><br><span class="line">    <span class="comment">// 找到并打印出按钮#su的值</span></span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="string">'#su'</span>).val())  <span class="comment">// 百度一下</span></span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+</code></pre><p>ok,现在已经了解并能使用这两个模块，更多的探索在自己，我们应当再用写时间去阅读其文档，对其有深入的了解。接下来就是用刚学的这些知识为你涨姿势了。</p>
+<h2 id="开始开发joke-cli"><a href="#开始开发joke-cli" class="headerlink" title="开始开发joke-cli"></a>开始开发<code>joke-cli</code></h2><h3 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h3><pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir joke-cli</span><br><span class="line">$ <span class="built_in">cd</span> joke-cli</span><br><span class="line">$ npm init</span><br><span class="line">$ npm install cheerio superagent colors --save //colors 输出美化</span><br></pre></td></tr></table></figure>
+</code></pre><p>新建好bin/index.js文件，并加入package.json文件中</p>
+<pre><code><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"bin": &#123;</span><br><span class="line">    "joke-cli": "./bin/index.js"</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p>现在执行<code>npm link</code>。我们的小项目就初始化成功了，就可以认真思考代码了</p>
+<h3 id="首先分析糗事百科url"><a href="#首先分析糗事百科url" class="headerlink" title="首先分析糗事百科url"></a>首先分析糗事百科url</h3><p>我们打开糗事百科会发现它的URL还是很简单，由于我们只是爬取段子所以url如下<code>http://www.qiushibaike.com/text/page/2/4965899</code>，2就是页数。</p>
+<p><img src="http://ommpd2lnj.bkt.clouddn.com/qiushibaike-url.png" alt="糗事百科"></p>
+<h3 id="开始编写index-js"><a href="#开始编写index-js" class="headerlink" title="开始编写index.js"></a>开始编写index.js</h3><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env node</span><br><span class="line"></span><br><span class="line">const superAgent = require(&apos;superagent&apos;)</span><br><span class="line">const cheerio = require(&apos;cheerio&apos;)</span><br><span class="line"></span><br><span class="line">let url = &apos;http://www.qiushibaike.com/text/page/&apos;</span><br><span class="line">let page = 1</span><br><span class="line"></span><br><span class="line">superAgent</span><br><span class="line">	.get(url+page) </span><br><span class="line">    .end((err, res)=&gt;&#123;</span><br><span class="line">      	if(err) console.error(err)</span><br><span class="line">        console.log(res.text)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+</code></pre><p><code>f12</code>查看糗事百科的HTML结构，可以发先每条笑话都在一个<code>div.article</code>中，笑话的内容则在<code>div.content</code>中</p>
+<p><img src="http://ommpd2lnj.bkt.clouddn.com/qiushibaike-html.png" alt="糗事百科HTML"></p>
+<p>在分析完html结够后，现在可以用我们用cheerio很容易就可以取出笑话</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">···</span><br><span class="line">.end(<span class="function">(<span class="params">err, res</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(err) <span class="built_in">console</span>.error(err)</span><br><span class="line">  <span class="keyword">const</span> $ = cheerio.load(res.text)</span><br><span class="line">  <span class="keyword">const</span> jokeList = $(<span class="string">'.article .content span'</span>)</span><br><span class="line">  jokeList.each(<span class="function"><span class="keyword">function</span>(<span class="params">i, item</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="keyword">this</span>).text()) <span class="comment">//将打印出每条笑话</span></span><br><span class="line">  &#125;)    </span><br><span class="line">&#125;)	</span><br><span class="line">···</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="实现命令行交互"><a href="#实现命令行交互" class="headerlink" title="实现命令行交互"></a>实现命令行交互</h3><p>这里我们需要用到readlinem模块</p>
+<h4 id="Readline-逐行读取"><a href="#Readline-逐行读取" class="headerlink" title="Readline(逐行读取)"></a>Readline(逐行读取)</h4><blockquote>
+<p><code>require(&#39;readline&#39;)</code> 模块提供了一个接口，用于从<a href="http://nodejs.cn/api/stream.html" target="_blank" rel="noopener">可读流</a>（如 <a href="http://nodejs.cn/api/process.html#process_process_stdin" target="_blank" rel="noopener"><code>process.stdin</code></a>）读取数据，每次读取一行。 基本用法如下：</p>
+</blockquote>
+<p> <em>使用 <code>readline.Interface</code> 类实现一个简单的命令行界面：</em></p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> readline = <span class="built_in">require</span>(<span class="string">'readline'</span>);</span><br><span class="line"><span class="keyword">const</span> rl = readline.createInterface(&#123;</span><br><span class="line">  input: process.stdin,</span><br><span class="line">  output: process.stdout,</span><br><span class="line">  prompt: <span class="string">'请输入&gt; '</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//rl.prompt() 方法会在 output 流中新的一行写入 readline.Interface 实例配置后的 prompt，用于为用户提供一个可供输入的新的位置</span></span><br><span class="line">rl.prompt();</span><br><span class="line"></span><br><span class="line">rl.on(<span class="string">'line'</span>, (line) =&gt; &#123;</span><br><span class="line">  <span class="keyword">switch</span>(line.trim()) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'hello'</span>:</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'world!'</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`你输入的是：'<span class="subst">$&#123;line.trim()&#125;</span>'`</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  rl.prompt();</span><br><span class="line">&#125;).on(<span class="string">'close'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'再见!'</span>);</span><br><span class="line">  process.exit(<span class="number">0</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</code></pre><p><em>更多参考<a href="http://nodejs.cn/api/readline.html" target="_blank" rel="noopener">Node.js中文网</a></em></p>
+<h3 id="改写index-js实现命令行交互功能"><a href="#改写index-js实现命令行交互功能" class="headerlink" title="改写index.js实现命令行交互功能"></a>改写index.js实现命令行交互功能</h3><pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> superAgent = <span class="built_in">require</span>(<span class="string">'superagent'</span>)</span><br><span class="line"><span class="keyword">const</span> cheerio = <span class="built_in">require</span>(<span class="string">'cheerio'</span>)</span><br><span class="line"><span class="keyword">const</span> readline = <span class="built_in">require</span>(<span class="string">'readline'</span>)</span><br><span class="line"><span class="keyword">const</span> colors = <span class="built_in">require</span>(<span class="string">'colors'</span>)</span><br><span class="line"><span class="comment">// 创建readlinde.Interface 实现命令行交互</span></span><br><span class="line"><span class="keyword">const</span> rl = readline.createInterface(&#123;</span><br><span class="line">    input: process.stdin,</span><br><span class="line">    output: process.stdout,</span><br><span class="line">    prompt: <span class="string">' ?  您正在使用joke-cli,按下回车查看笑话 ? &gt;&gt;&gt;'</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">let</span> url = <span class="string">'http://www.qiushibaike.com/text/page/'</span></span><br><span class="line"><span class="keyword">let</span> page = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用数组来存放笑话</span></span><br><span class="line"><span class="keyword">let</span> jokeStories = []</span><br><span class="line"><span class="comment">// 载入笑话并存入数组中</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadJokes</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  	<span class="comment">// 数组中的笑话不足三条时就请求下一页的数据</span></span><br><span class="line">    <span class="keyword">if</span>(jokeStories.length&lt;<span class="number">3</span>)&#123;</span><br><span class="line">        superAgent</span><br><span class="line">        .get(url+page) </span><br><span class="line">        .end(<span class="function">(<span class="params">err, res</span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(err) <span class="built_in">console</span>.error(err)</span><br><span class="line">            <span class="keyword">const</span> $ = cheerio.load(res.text)</span><br><span class="line">            <span class="keyword">const</span> jokeList = $(<span class="string">'.article .content span'</span>)</span><br><span class="line">            jokeList.each(<span class="function"><span class="keyword">function</span>(<span class="params">i, item</span>)</span>&#123;</span><br><span class="line">                jokeStories.push($(<span class="keyword">this</span>).text()) <span class="comment">//存入数组</span></span><br><span class="line">            &#125;)</span><br><span class="line">            page++            </span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">rl.prompt()</span><br><span class="line">loadJokes()</span><br><span class="line"><span class="comment">// line事件 每当 input 流接收到接收行结束符（\n、\r 或 \r\n）时触发 'line' 事件。 通常发生在用户按下 &lt;Enter&gt; 键或 &lt;Return&gt; 键。</span></span><br><span class="line"><span class="comment">// 按下回车键显示一条笑话</span></span><br><span class="line">rl.on(<span class="string">'line'</span>, (line) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(jokeStories.length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'======================'</span>)</span><br><span class="line">        <span class="built_in">console</span>.log(jokeStories.shift().bgCyan.black) <span class="comment">//用colors模块改变输出颜色</span></span><br><span class="line">        loadJokes()</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'正在加载中~~~'</span>.green)</span><br><span class="line">    &#125;</span><br><span class="line">    rl.prompt()</span><br><span class="line">&#125;).on(<span class="string">'close'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Bye!'</span>)</span><br><span class="line">    process.exit(<span class="number">0</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</code></pre><p>这里我们用了一个数组存放笑话，每按下回车，就显示一条(<code>shift()</code>删除并返回数组第一个元素)，当数组中不足三条时就请求新的一页</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到此，我们的joke-cli就开发完成。此时我们应该了解了superagent, cheerio， readline等模块的使用。这会儿应该趁热打铁，快去好好看看这些模块吧</p>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
+<li><a href="https://cheerio.js.org/" target="_blank" rel="noopener">cheerio</a></li>
+<li><a href="http://visionmedia.github.io/superagent/" target="_blank" rel="noopener">superagent</a></li>
+<li><a href="https://cnodejs.org/topic/5378720ed6e2d16149fa16bd" target="_blank" rel="noopener">译)SuperAgent中文使用文档</a></li>
+<li><a href="http://nodejs.cn/api/readline.html" target="_blank" rel="noopener">Node.js中文网</a></li>
+<li><a href="https://github.com/marak/colors.js/" target="_blank" rel="noopener">colors.js</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="http://github.com/liuxing">Projects</a></li>
+         
+          <li><a href="/one-more-thing/">One more thing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Node命令行工具开发【看段子】"><span class="toc-number">1.</span> <span class="toc-text">Node命令行工具开发【看段子】</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#总览：命令行看段子小程序"><span class="toc-number">1.1.</span> <span class="toc-text">总览：命令行看段子小程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初识-新手村"><span class="toc-number">1.2.</span> <span class="toc-text">初识[新手村]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cheerio"><span class="toc-number">1.2.1.</span> <span class="toc-text">cheerio</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#superagent"><span class="toc-number">1.2.2.</span> <span class="toc-text">superagent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初出茅庐【先拿百度练练手】"><span class="toc-number">1.2.3.</span> <span class="toc-text">初出茅庐【先拿百度练练手】</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始开发joke-cli"><span class="toc-number">1.3.</span> <span class="toc-text">开始开发joke-cli</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化项目"><span class="toc-number">1.3.1.</span> <span class="toc-text">初始化项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#首先分析糗事百科url"><span class="toc-number">1.3.2.</span> <span class="toc-text">首先分析糗事百科url</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始编写index-js"><span class="toc-number">1.3.3.</span> <span class="toc-text">开始编写index.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现命令行交互"><span class="toc-number">1.3.4.</span> <span class="toc-text">实现命令行交互</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Readline-逐行读取"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">Readline(逐行读取)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#改写index-js实现命令行交互功能"><span class="toc-number">1.3.5.</span> <span class="toc-text">改写index.js实现命令行交互功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关链接"><span class="toc-number">1.5.</span> <span class="toc-text">相关链接</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/03/joke-cli/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/03/joke-cli/&text=Node命令行工具开发【看段子】"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/03/joke-cli/&title=Node命令行工具开发【看段子】"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/03/joke-cli/&is_video=false&description=Node命令行工具开发【看段子】"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Node命令行工具开发【看段子】&body=Check out this article: http://yoursite.com/2017/03/joke-cli/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/03/joke-cli/&title=Node命令行工具开发【看段子】"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/03/joke-cli/&title=Node命令行工具开发【看段子】"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/03/joke-cli/&title=Node命令行工具开发【看段子】"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/03/joke-cli/&title=Node命令行工具开发【看段子】"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/03/joke-cli/&name=Node命令行工具开发【看段子】&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Liu Xing
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="http://github.com/liuxing">Projects</a></li>
+         
+          <li><a href="/one-more-thing/">One more thing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

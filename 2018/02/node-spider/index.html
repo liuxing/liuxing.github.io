@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="决定送大家一套美图。但是授之以鱼不如授之以渔，我们就来使用node实现个小爬虫去爬取各种美女 来吧，我们先来看看今天的目标: mmjpg.com的美腿频道下的图片  在开始之前先来科普科普  美腿是形容女性美丽、性感、修长的腿形美。美腿可以分为白璧无瑕的大腿美、晶莹剔透的小腿美、细微的美足、健康明朗的腿形美。所谓腿健美，是指腿部的线条美。腿的长短与肥瘦是决定腿部美丑的两大因素。  一、实现步骤 确">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node爬虫：送你一大波美腿图">
+<meta property="og:url" content="http://yoursite.com/2018/02/node-spider/index.html">
+<meta property="og:site_name" content="LIU XING">
+<meta property="og:description" content="决定送大家一套美图。但是授之以鱼不如授之以渔，我们就来使用node实现个小爬虫去爬取各种美女 来吧，我们先来看看今天的目标: mmjpg.com的美腿频道下的图片  在开始之前先来科普科普  美腿是形容女性美丽、性感、修长的腿形美。美腿可以分为白璧无瑕的大腿美、晶莹剔透的小腿美、细微的美足、健康明朗的腿形美。所谓腿健美，是指腿部的线条美。腿的长短与肥瘦是决定腿部美丑的两大因素。  一、实现步骤 确">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/8/16175beabb0b35b2">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/8/16175bf06f467184?w=2560&h=1600&f=png&s=362292">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/8/16175bf48a55b880?w=2560&h=1600&f=png&s=400521">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/8/16175bf883f32d93?w=2560&h=1600&f=png&s=227469">
+<meta property="og:updated_time" content="2018-09-26T03:20:23.136Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="node爬虫：送你一大波美腿图">
+<meta name="twitter:description" content="决定送大家一套美图。但是授之以鱼不如授之以渔，我们就来使用node实现个小爬虫去爬取各种美女 来吧，我们先来看看今天的目标: mmjpg.com的美腿频道下的图片  在开始之前先来科普科普  美腿是形容女性美丽、性感、修长的腿形美。美腿可以分为白璧无瑕的大腿美、晶莹剔透的小腿美、细微的美足、健康明朗的腿形美。所谓腿健美，是指腿部的线条美。腿的长短与肥瘦是决定腿部美丑的两大因素。  一、实现步骤 确">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/2/8/16175beabb0b35b2">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+        
+    
+    <!-- title -->
+    <title>node爬虫：送你一大波美腿图</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="http://github.com/liuxing">Projects</a></li>
+         
+          <li><a href="/one-more-thing/">One more thing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/05/css-modules-tutorial/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/12/nodemailer/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/02/node-spider/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/02/node-spider/&text=node爬虫：送你一大波美腿图"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/02/node-spider/&title=node爬虫：送你一大波美腿图"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/02/node-spider/&is_video=false&description=node爬虫：送你一大波美腿图"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=node爬虫：送你一大波美腿图&body=Check out this article: http://yoursite.com/2018/02/node-spider/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/02/node-spider/&title=node爬虫：送你一大波美腿图"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/02/node-spider/&title=node爬虫：送你一大波美腿图"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/02/node-spider/&title=node爬虫：送你一大波美腿图"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/02/node-spider/&title=node爬虫：送你一大波美腿图"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/02/node-spider/&name=node爬虫：送你一大波美腿图&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、实现步骤"><span class="toc-number">1.</span> <span class="toc-text">一、实现步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、开始编写爬取妹子图的爬虫"><span class="toc-number">2.</span> <span class="toc-text">二、开始编写爬取妹子图的爬虫</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-请求URL获取HTML"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 请求URL获取HTML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-分析页面结构"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 分析页面结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-分析URL地址"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 分析URL地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-获取图片地址"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 获取图片地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-保存图片到本地"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 保存图片到本地</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、参考链接"><span class="toc-number">3.</span> <span class="toc-text">三、参考链接</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        node爬虫：送你一大波美腿图
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">LIU XING</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-02-07T16:00:00.000Z" itemprop="datePublished">2018-02-08</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>决定送大家一套美图。但是授之以鱼不如授之以渔，我们就来使用node实现个小爬虫去爬取各种美女</p>
+<p>来吧，我们先来看看今天的目标: mmjpg.com的美腿频道下的图片</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/8/16175beabb0b35b2" alt=""></p>
+<p>在开始之前先来科普科普</p>
+<blockquote>
+<p>美腿是形容女性美丽、性感、修长的腿形美。美腿可以分为白璧无瑕的大腿美、晶莹剔透的小腿美、细微的美足、健康明朗的腿形美。所谓腿健美，是指腿部的线条美。腿的长短与肥瘦是决定腿部美丑的两大因素。</p>
+</blockquote>
+<h2 id="一、实现步骤"><a href="#一、实现步骤" class="headerlink" title="一、实现步骤"></a>一、实现步骤</h2><ol>
+<li>确定目标页面</li>
+<li>使用superagent库来获取页面</li>
+<li>分析页面结构，使用cheerio 获取有效信息</li>
+<li>保存图片到本地</li>
+<li>开撸</li>
+<li>不断优化</li>
+</ol>
+<h2 id="二、开始编写爬取妹子图的爬虫"><a href="#二、开始编写爬取妹子图的爬虫" class="headerlink" title="二、开始编写爬取妹子图的爬虫"></a>二、开始编写爬取妹子图的爬虫</h2><p>下载这个小项目需要使用的库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i superagent cheerio fs-extra --save</span><br></pre></td></tr></table></figure>
+<p>这儿我们用到了<code>superagent</code> <code>cheerio</code> <code>fs-extra</code>这三个库</p>
+<ul>
+<li>superagent 是nodejs里一个非常方便的客户端请求代理模块</li>
+<li>cheerio：为服务器特别定制的，快速、灵活、实施的jQuery核心实现</li>
+<li>fs-extra： 丰富了fs模块，同时支持async/await</li>
+</ul>
+<h3 id="2-1-请求URL获取HTML"><a href="#2-1-请求URL获取HTML" class="headerlink" title="2.1 请求URL获取HTML"></a>2.1 请求URL获取HTML</h3><p>使用superagent发起请求并打印出页面内容</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">'superagent'</span>)</span><br><span class="line"><span class="keyword">const</span> cheerio = <span class="built_in">require</span>(<span class="string">'cheerio'</span>)</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs-extra'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> url = <span class="string">'http://www.mmjpg.com/tag/meitui/'</span></span><br><span class="line"></span><br><span class="line">request</span><br><span class="line">  .get(url + <span class="string">'1'</span>)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res.text)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 你就可以看见HTML内容打印到了控制台</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-2-分析页面结构"><a href="#2-2-分析页面结构" class="headerlink" title="2.2 分析页面结构"></a>2.2 分析页面结构</h3><p>现在我们就需要分析页面结构，然后使用cheerio来操作了，你没用过cheerio不要紧它的语法和jQuery基本一样。作为前端，在开发者工具中分析页面应该是家常便饭，手到擒来。这儿就不多说了，记住我们的目标是找出需要的节点获取到有效信息就好</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/8/16175bf06f467184?w=2560&amp;h=1600&amp;f=png&amp;s=362292" alt=""></p>
+<p>我们可以发现需要的东西都在<code>class</code>为pic那个<code>div</code>下的列表中，现在我们就可以使用cheerio来获取</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getUrl</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> request.get(url + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">const</span> $ = cheerio.load(res.text)</span><br><span class="line">    $(<span class="string">'.pic li'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">i, elem</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> href = $(<span class="keyword">this</span>).find(<span class="string">'a'</span>).attr(<span class="string">'href'</span>)</span><br><span class="line">        <span class="keyword">const</span> title = $(<span class="keyword">this</span>).find(<span class="string">'.title'</span>).text()</span><br><span class="line">        <span class="built_in">console</span>.log(title, href)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getUrl()</span><br><span class="line"></span><br><span class="line"><span class="comment">/* console</span></span><br><span class="line"><span class="comment">$ node app.js</span></span><br><span class="line"><span class="comment">大美女尹菲开档网袜写真令人眼花缭乱 http://www.mmjpg.com/mm/1230</span></span><br><span class="line"><span class="comment">宅男女神丰满诱人的胴体令人想入非非 http://www.mmjpg.com/mm/1164</span></span><br><span class="line"><span class="comment">性感美女浴室写真高耸的酥胸诱惑十足 http://www.mmjpg.com/mm/1162</span></span><br><span class="line"><span class="comment">长相清纯甜美的97年妹子苗条美腿图片 http://www.mmjpg.com/mm/1157</span></span><br><span class="line"><span class="comment">丽质美女柔美修长美腿带给你曼妙感受 http://www.mmjpg.com/mm/1153</span></span><br><span class="line"><span class="comment">容貌似杨幂的美女馨怡美腿极致诱惑图 http://www.mmjpg.com/mm/1148</span></span><br><span class="line"><span class="comment">丝袜美腿诱惑!甜美女神杨晨晨私房套图 http://www.mmjpg.com/mm/1130</span></span><br><span class="line"><span class="comment">性感美女刘钰儿透视内衣私密照真撩人 http://www.mmjpg.com/mm/1127</span></span><br><span class="line"><span class="comment">肤白貌美的模特李晨晨十分惹人怜爱 http://www.mmjpg.com/mm/1126</span></span><br><span class="line"><span class="comment">萌妹林美惠子穿黑丝浴室私房写真福利 http://www.mmjpg.com/mm/1124</span></span><br><span class="line"><span class="comment">美女赵小米修长双腿丝袜写真能玩几年 http://www.mmjpg.com/mm/1111</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-3-分析URL地址"><a href="#2-3-分析URL地址" class="headerlink" title="2.3 分析URL地址"></a>2.3 分析URL地址</h3><p>在很多时候我们都需要分析URL，就像点击不同的页码观察URL变化 <a href="http://www.mmjpg.com/tag/meitui/2，我们可以很容易发现页码对应为URL最后的数字。查看mmjpg.com的美腿频道我们可以发现它一共有10页内容，我们就不写代码判断页数了直接写死为10。当然了这儿你可以自己实现动态判断总页数，就当是留的小练习吧。" target="_blank" rel="noopener">http://www.mmjpg.com/tag/meitui/2，我们可以很容易发现页码对应为URL最后的数字。查看mmjpg.com的美腿频道我们可以发现它一共有10页内容，我们就不写代码判断页数了直接写死为10。当然了这儿你可以自己实现动态判断总页数，就当是留的小练习吧。</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getUrl</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> linkArr = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> request.get(url + i)</span><br><span class="line">    <span class="keyword">const</span> $ = cheerio.load(res.text)</span><br><span class="line">    $(<span class="string">'.pic li'</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params">i, elem</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">let</span> link = $(<span class="keyword">this</span>).find(<span class="string">'a'</span>).attr(<span class="string">'href'</span>)</span><br><span class="line">      linkArr.push(link)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> linkArr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-获取图片地址"><a href="#2-4-获取图片地址" class="headerlink" title="2.4 获取图片地址"></a>2.4 获取图片地址</h3><p>现在我们已经能获取到图集的URL了。在上一步我们获取图集URL的时候是把页码写死了的，这是因为那个页码不是动态的，然而每个图集的图片页数是不一样的，这儿我们就需要动态判断了。进入图集后，切换图片的页码URL也会跟着变，现在这个URL就是每张图片页面的URL。我们只需要获取最后一个页面的页码， 从 1 开始历遍，和我们上面获取的URL拼接在一起就是每张图片的页面地址啦！</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/8/16175bf48a55b880?w=2560&amp;h=1600&amp;f=png&amp;s=400521" alt=""></p>
+<p>获取到单个图片URL后，我们可以通过图片的<code>src</code>属性去拿到真实的图片地址，然后实现下载保存</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getPic</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> request.get(url)</span><br><span class="line">  <span class="keyword">const</span> $ = cheerio.load(res.text)</span><br><span class="line">  <span class="comment">// 以图集名称来分目录</span></span><br><span class="line">  <span class="keyword">const</span> dir = $(<span class="string">'.article h2'</span>).text()</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`创建<span class="subst">$&#123;title&#125;</span>文件夹`</span>)</span><br><span class="line">  <span class="keyword">await</span> fs.mkdir(path.join(__dirname, <span class="string">'/mm'</span>, title))</span><br><span class="line">  <span class="keyword">const</span> pageCount = <span class="built_in">parseInt</span>($(<span class="string">'#page .ch.all'</span>).prev().text())</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= pageCount; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> pageUrl = url + <span class="string">'/'</span> + i</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">await</span> request.get(pageUrl)</span><br><span class="line">    <span class="keyword">const</span> _$ = cheerio.load(data.text)</span><br><span class="line">    <span class="comment">// 获取图片的真实地址</span></span><br><span class="line">    <span class="keyword">const</span> imgUrl = _$(<span class="string">'#content img'</span>).attr(<span class="string">'src'</span>)</span><br><span class="line">    download(dir, imgUrl) <span class="comment">// TODO</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-保存图片到本地"><a href="#2-5-保存图片到本地" class="headerlink" title="2.5 保存图片到本地"></a>2.5 保存图片到本地</h3><p>现在我们就来实现下载保存图片的方法，这儿我们使用了<code>stream</code>(流) 来保存图片</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">download</span>(<span class="params">dir, imgUrl</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`正在下载<span class="subst">$&#123;imgUrl&#125;</span>`</span>)</span><br><span class="line">  <span class="keyword">const</span> filename = imgUrl.split(<span class="string">'/'</span>).pop()  </span><br><span class="line">  <span class="keyword">const</span> req = request.get(imgUrl)</span><br><span class="line">    .set(&#123; <span class="string">'Referer'</span>: <span class="string">'http://www.mmjpg.com'</span> &#125;) <span class="comment">// mmjpg.com根据Referer来限制访问</span></span><br><span class="line">  req.pipe(fs.createWriteStream(path.join(__dirname, <span class="string">'mm'</span>, dir, filename)))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ok，现在我们就来把之前写的各个功能的函数连起来</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> urls = <span class="keyword">await</span> getUrl()</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> url <span class="keyword">of</span> urls) &#123;</span><br><span class="line">    <span class="keyword">await</span> getPic(url)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">init()</span><br></pre></td></tr></table></figure>
+<p>运行该文件，你就可以看终端打印出入下信息，你的文件夹中也多了好多美女图哟！开不开心？嗨不嗨皮？</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/8/16175bf883f32d93?w=2560&amp;h=1600&amp;f=png&amp;s=227469" alt=""></p>
+<p><strong>前方高能</strong></p>
+<p><strong>一大波美女来袭</strong></p>
+<p>好吧~不删掉通过不了</p>
+<p>源码：<a href="https://github.com/ogilhinn/mm-spider" target="_blank" rel="noopener">https://github.com/ogilhinn/mm-spider</a></p>
+<p>到此这个小爬虫就算写完了，但是这只是一个很简陋的爬虫，还有很多需要改进的地方</p>
+<p>你还可以加入很多东西让它更健壮,如：</p>
+<ul>
+<li>使用多个userAgent</li>
+<li>不断更换代理ip</li>
+<li>降低爬虫的速度，加个<code>sleep()</code></li>
+<li>……</li>
+</ul>
+<p><em>如何让它更健壮、如何应对反爬虫策略这些留着以后再讲吧</em></p>
+<h2 id="三、参考链接"><a href="#三、参考链接" class="headerlink" title="三、参考链接"></a>三、参考链接</h2><ul>
+<li>源码：<a href="https://github.com/ogilhinn/mm-spider" target="_blank" rel="noopener">https://github.com/ogilhinn/mm-spider</a></li>
+<li>superagent： <a href="http://visionmedia.github.io/superagent/" target="_blank" rel="noopener">http://visionmedia.github.io/superagent/</a></li>
+<li>cheerio：<a href="https://github.com/cheeriojs/cheerio" target="_blank" rel="noopener">https://github.com/cheeriojs/cheerio</a></li>
+<li>fs-extra：<a href="https://github.com/jprichardson/node-fs-extra" target="_blank" rel="noopener">https://github.com/jprichardson/node-fs-extra</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="http://github.com/liuxing">Projects</a></li>
+         
+          <li><a href="/one-more-thing/">One more thing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、实现步骤"><span class="toc-number">1.</span> <span class="toc-text">一、实现步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、开始编写爬取妹子图的爬虫"><span class="toc-number">2.</span> <span class="toc-text">二、开始编写爬取妹子图的爬虫</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-请求URL获取HTML"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 请求URL获取HTML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-分析页面结构"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 分析页面结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-分析URL地址"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 分析URL地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-获取图片地址"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 获取图片地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-保存图片到本地"><span class="toc-number">2.5.</span> <span class="toc-text">2.5 保存图片到本地</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、参考链接"><span class="toc-number">3.</span> <span class="toc-text">三、参考链接</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/02/node-spider/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/02/node-spider/&text=node爬虫：送你一大波美腿图"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/02/node-spider/&title=node爬虫：送你一大波美腿图"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/02/node-spider/&is_video=false&description=node爬虫：送你一大波美腿图"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=node爬虫：送你一大波美腿图&body=Check out this article: http://yoursite.com/2018/02/node-spider/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/02/node-spider/&title=node爬虫：送你一大波美腿图"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/02/node-spider/&title=node爬虫：送你一大波美腿图"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/02/node-spider/&title=node爬虫：送你一大波美腿图"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/02/node-spider/&title=node爬虫：送你一大波美腿图"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/02/node-spider/&name=node爬虫：送你一大波美腿图&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Liu Xing
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="http://github.com/liuxing">Projects</a></li>
+         
+          <li><a href="/one-more-thing/">One more thing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

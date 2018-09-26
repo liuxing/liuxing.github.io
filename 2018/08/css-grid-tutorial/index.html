@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="CSS Grid 布局快速教程CSS Grid 布局是 CSS 中最强大的布局系统（没有之一）。说起布局，另一个方便好用的Flex布局是避不开的，与 Flex 的一维布局系统不同，CSS Grid 布局是一个二维布局系统，也就意味着它可以同时处理列和行。你可以把它想象成一个Table。本文不是一个大而全的教程，而是一个快速入门。 使用Grid 布局实现一个九宫格与Flex 布局类似，Grid 布局">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS Grid 布局快速教程">
+<meta property="og:url" content="http://yoursite.com/2018/08/css-grid-tutorial/index.html">
+<meta property="og:site_name" content="LIU XING">
+<meta property="og:description" content="CSS Grid 布局快速教程CSS Grid 布局是 CSS 中最强大的布局系统（没有之一）。说起布局，另一个方便好用的Flex布局是避不开的，与 Flex 的一维布局系统不同，CSS Grid 布局是一个二维布局系统，也就意味着它可以同时处理列和行。你可以把它想象成一个Table。本文不是一个大而全的教程，而是一个快速入门。 使用Grid 布局实现一个九宫格与Flex 布局类似，Grid 布局">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/Users/lx/Desktop/屏幕快照%202018-08-21%2015.21.03.png">
+<meta property="og:image" content="http://yoursite.com/Users/lx/Desktop/屏幕快照%202018-08-21%2016.02.27.png">
+<meta property="og:image" content="http://yoursite.com/Users/lx/Desktop/屏幕快照%202018-08-21%2016.09.32.png">
+<meta property="og:updated_time" content="2018-09-26T04:09:59.728Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS Grid 布局快速教程">
+<meta name="twitter:description" content="CSS Grid 布局快速教程CSS Grid 布局是 CSS 中最强大的布局系统（没有之一）。说起布局，另一个方便好用的Flex布局是避不开的，与 Flex 的一维布局系统不同，CSS Grid 布局是一个二维布局系统，也就意味着它可以同时处理列和行。你可以把它想象成一个Table。本文不是一个大而全的教程，而是一个快速入门。 使用Grid 布局实现一个九宫格与Flex 布局类似，Grid 布局">
+<meta name="twitter:image" content="http://yoursite.com/Users/lx/Desktop/屏幕快照%202018-08-21%2015.21.03.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+        
+    
+    <!-- title -->
+    <title>CSS Grid 布局快速教程</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="http://github.com/liuxing">Projects</a></li>
+         
+          <li><a href="/one-more-thing/">One more thing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2018/06/node-blog-tutorial/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/08/css-grid-tutorial/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/08/css-grid-tutorial/&text=CSS Grid 布局快速教程"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/08/css-grid-tutorial/&title=CSS Grid 布局快速教程"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/08/css-grid-tutorial/&is_video=false&description=CSS Grid 布局快速教程"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CSS Grid 布局快速教程&body=Check out this article: http://yoursite.com/2018/08/css-grid-tutorial/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/08/css-grid-tutorial/&title=CSS Grid 布局快速教程"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/08/css-grid-tutorial/&title=CSS Grid 布局快速教程"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/08/css-grid-tutorial/&title=CSS Grid 布局快速教程"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/08/css-grid-tutorial/&title=CSS Grid 布局快速教程"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/08/css-grid-tutorial/&name=CSS Grid 布局快速教程&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS-Grid-布局快速教程"><span class="toc-number">1.</span> <span class="toc-text">CSS Grid 布局快速教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Grid-布局实现一个九宫格"><span class="toc-number">1.1.</span> <span class="toc-text">使用Grid 布局实现一个九宫格</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        CSS Grid 布局快速教程
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">LIU XING</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-08-20T16:00:00.000Z" itemprop="datePublished">2018-08-21</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="CSS-Grid-布局快速教程"><a href="#CSS-Grid-布局快速教程" class="headerlink" title="CSS Grid 布局快速教程"></a>CSS Grid 布局快速教程</h1><p>CSS Grid 布局是 CSS 中最强大的布局系统（没有之一）。说起布局，另一个方便好用的Flex布局是避不开的，与 Flex 的一维布局系统不同，CSS Grid 布局是一个二维布局系统，也就意味着它可以同时处理列和行。你可以把它想象成一个Table。本文不是一个大而全的教程，而是一个快速入门。</p>
+<h2 id="使用Grid-布局实现一个九宫格"><a href="#使用Grid-布局实现一个九宫格" class="headerlink" title="使用Grid 布局实现一个九宫格"></a>使用Grid 布局实现一个九宫格</h2><p>与Flex 布局类似，Grid 布局由 <strong>wrapper</strong>（父元素）和 <strong>items</strong>（子元素）两部分组成。在介绍它的详细语法之前先来个例子: 九宫格 <a href="https://codepen.io/ogilhinn/pen/mGdQZq" target="_blank" rel="noopener">https://codepen.io/ogilhinn/pen/mGdQZq</a></p>
+<p><img src="/Users/lx/Desktop/屏幕快照 2018-08-21 15.21.03.png" alt="屏幕快照 2018-08-21 15.21.03"></p>
+<p>代码如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrapper"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span>5<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span>6<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span>7<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span>8<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span>9<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#ddd</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">100px</span> <span class="number">100px</span> <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="number">100px</span> <span class="number">100px</span> <span class="number">100px</span>;  </span><br><span class="line">  <span class="attribute">grid-column-gap</span>: <span class="number">2px</span>;</span><br><span class="line">  <span class="attribute">grid-row-gap</span>: <span class="number">2px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们就得到了一个3X3的九宫格。</p>
+<p>这儿用到了 <code>grid-template-columns</code> <code>grid-template-rows</code> 属性，这两个属性用于创建列(columns)和行(rows)。<code>grid-template</code> 是 <code>grid-template-rows</code> 和 <code>grid-template-columns</code> 的缩写形式。上面的CSS可以缩写为：</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  grid-template: <span class="number">100px</span> <span class="number">100px</span> <span class="number">100px</span> / <span class="number">100px</span> <span class="number">100px</span> <span class="number">100px</span>;</span><br><span class="line">  <span class="comment">// 指定一些具有相同宽度的网格项会变得很乏味。repeat函数可以帮助我们。</span></span><br><span class="line">  <span class="comment">// grid-template: repeat(3, 100px) / repeat(3, 100px);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>grid-column-gap</code> <code>grid-row-gap</code>指定网格线(grid lines)的大小。你可以把它想象为设置列/行之间间距的宽度。</p>
+<p>这些几个属性都用于网格容器即父元素。</p>
+<p>##设置网格项（子元素）</p>
+<p>与 Flex 一样，子元素也是可设置的，现在我们想把第一元素占据整行，修改CSS，让第一个元素从第一个网格线开始到第四的网格线结束。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="selector-class">.item</span><span class="selector-pseudo">:first-child</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#f00</span>;</span><br><span class="line">  <span class="attribute">grid-column-start</span>: <span class="number">1</span>;</span><br><span class="line">  <span class="attribute">grid-column-end</span>: <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你不明白我们设置的只有 3 列，为什么有4条网格线呢？看下面</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="addition">+-------+-------+-------+</span></span><br><span class="line"><span class="addition">+       +       +       +</span></span><br><span class="line"><span class="addition">+       +       +       + </span></span><br><span class="line"><span class="addition">+-------+-------+-------+</span></span><br><span class="line">1       2       3       4</span><br></pre></td></tr></table></figure>
+<p>当第一格占满后，剩下子元素将被挤到下一行（这儿为了好看，我们删除3个元素）。  <code>grid-column-start</code> 与 <code>grid-column-end</code> 可以缩写为<code></code>grid-column`</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="selector-class">.item</span><span class="selector-pseudo">:first-child</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#f00</span>;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">1</span> / <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>grid-row</code> 与 <code>grid-column</code> 差不多，只是行与列的差别。为了加深印象，我们来让第二个元素占满第一列，如图<br><img src="/Users/lx/Desktop/屏幕快照 2018-08-21 16.02.27.png" alt="屏幕快照 2018-08-21 16.02.27"></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="selector-class">.item</span><span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#0f0</span>;</span><br><span class="line">  <span class="attribute">grid-row-start</span>: <span class="number">2</span>;</span><br><span class="line">  <span class="attribute">grid-row-end</span>: <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同样，可以缩写为</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">grid-row: 2 / 4</span><br></pre></td></tr></table></figure>
+<p>我还希望把3号元素占满剩下的灰色区域，通过上面学习几个属性我们可以很快实现这个小需求。（还是为了好看，我们再删除3个元素）</p>
+<p><img src="/Users/lx/Desktop/屏幕快照 2018-08-21 16.09.32.png" alt="屏幕快照 2018-08-21 16.09.32"></p>
+<p>修改CSS，让3元素的行和列都设置为从第二个网格线到第四个网格线即可<br><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="selector-class">.item</span><span class="selector-pseudo">:nth-child(3)</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">2</span> / <span class="number">4</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: <span class="number">2</span> / <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果你觉得这样写有点麻烦，我们还有另一种缩写 <code>grid-area</code> <code>grid-area</code>属性接受4个由’/‘分开的值：<code>grid-row-start</code>, <code>grid-column-start</code>, <code>grid-row-end</code>, 最后是<code>grid-column-end</code>。上例可修改为：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="selector-class">.item</span><span class="selector-pseudo">:nth-child(3)</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: <span class="number">2</span> / <span class="number">2</span> / <span class="number">4</span> / <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的这个结构，在实际中很常见 Header, Sidebar, Main。我们可以使用 <code>grid-template-areas</code> 属性 通过引用 <code>grid-area</code> 属性指定的 网格区域(Grid Area) 名称来定义网格模板。重复网格区域的名称导致内容跨越这些单元格。一个点号（<code>.</code>）代表一个空的网格单元。这个语法本身可视作网格的可视化结构。代码如下</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrapper"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#ddd</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  grid-gap: <span class="number">2px</span>;</span><br><span class="line">  <span class="comment">// 很直观的网格区域划分</span></span><br><span class="line">  grid-template-areas: </span><br><span class="line">    <span class="string">"header header header"</span></span><br><span class="line">    <span class="string">"sidebar main main"</span></span><br><span class="line">    <span class="string">"sidebar main main"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.item</span>:first-child &#123;</span><br><span class="line">  grid-<span class="selector-tag">area</span>: header;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#f00</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item</span>:nth-child(2) &#123; </span><br><span class="line">  grid-<span class="selector-tag">area</span>: sidebar; </span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#0f0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.item</span>:nth-child(3) &#123; </span><br><span class="line">  grid-<span class="selector-tag">area</span>: main; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>网格模板区域（grid-template-areas）属性提供了一个可视化的网格结构，使网格容器的整体布局更容易被理解。</p>
+<p>除了上文介绍的网格布局外  还有一些<code>justify-items</code> <code>align-items</code> <code>justify-content</code> 之类的属性设置对齐方式，这儿就不一一举例了。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="http://github.com/liuxing">Projects</a></li>
+         
+          <li><a href="/one-more-thing/">One more thing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS-Grid-布局快速教程"><span class="toc-number">1.</span> <span class="toc-text">CSS Grid 布局快速教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Grid-布局实现一个九宫格"><span class="toc-number">1.1.</span> <span class="toc-text">使用Grid 布局实现一个九宫格</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/08/css-grid-tutorial/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/08/css-grid-tutorial/&text=CSS Grid 布局快速教程"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/08/css-grid-tutorial/&title=CSS Grid 布局快速教程"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/08/css-grid-tutorial/&is_video=false&description=CSS Grid 布局快速教程"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CSS Grid 布局快速教程&body=Check out this article: http://yoursite.com/2018/08/css-grid-tutorial/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/08/css-grid-tutorial/&title=CSS Grid 布局快速教程"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/08/css-grid-tutorial/&title=CSS Grid 布局快速教程"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/08/css-grid-tutorial/&title=CSS Grid 布局快速教程"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/08/css-grid-tutorial/&title=CSS Grid 布局快速教程"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/08/css-grid-tutorial/&name=CSS Grid 布局快速教程&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Liu Xing
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="http://github.com/liuxing">Projects</a></li>
+         
+          <li><a href="/one-more-thing/">One more thing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
